@@ -53,6 +53,30 @@ class ParserTest extends TestCase
                 "I've got a kernel stuck in my teeth.",
                 "kernel stuck",
             ],
+            [
+                "In general, I think it's a bad idea.",
+                false,
+            ],
+            [
+                "What do you think about it in general?",
+                false,
+            ],
+            [
+                "The question is who poisoned the GENERAL at Bomas & was he driven to the hospital or taken from his House?",
+                false,
+            ],
+            [
+                "Still struggling to understand the death of General Joseph Nkaissery.",
+                false,
+            ],
+            [
+                "Mosul victory announcement 'imminent', US Brigadier General Sofge tells me from Baghdad",
+                false,
+            ],
+            [
+                "He's STILL a celebrated general....just not in DC, Hollywood or the elite media.",
+                false,
+            ],
         ];
     }
 
