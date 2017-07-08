@@ -1,4 +1,11 @@
 {
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Jeff Puckett",
+            "email": "jeff@jeffpuckett.com"
+        }
+    ],
     "require": {
         "php": "^7.0"
     },
