@@ -6,6 +6,11 @@
             "email": "jeff@jeffpuckett.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "scratchers\\salute\\": "src/"
+        }
+    },
     "require": {
         "php": "^7.0"
     },
