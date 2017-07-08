@@ -34,6 +34,10 @@ class ParserTest extends TestCase
                 "major buzz-kill",
             ],
             [
+                "But after the first year, I get a major pay raise.",
+                "major pay raise",
+            ],
+            [
                 "Look, it's a private thing between me and Ted.",
                 "private thing",
             ],
