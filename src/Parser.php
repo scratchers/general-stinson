@@ -10,7 +10,7 @@ class Parser
      */
     public function parse(string $statement)
     {
-        $regex = '/(major|private|general|kernel) [\w\-]+/';
+        $regex = '/(major|private|general|kernel) \w[\w\-]*/';
         $matches = [];
 
         if (false == preg_match($regex, $statement, $matches)) {

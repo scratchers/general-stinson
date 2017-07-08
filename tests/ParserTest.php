@@ -77,6 +77,10 @@ class ParserTest extends TestCase
                 "He's STILL a celebrated general....just not in DC, Hollywood or the elite media.",
                 false,
             ],
+            [
+                "Mosul victory announcement 'imminent': US general - Yahoo Singapore News",
+                false,
+            ],
         ];
     }
 
