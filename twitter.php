@@ -7,20 +7,27 @@ require __DIR__.'/vendor/autoload.php';
  */
 class FilterTrackConsumer extends OauthPhirehose
 {
-  /**
-   * Enqueue each status
-   *
-   * @param string $status
-   */
-  public function enqueueStatus($status)
-  {
-      // returns an instance of PDO
-      $pdo = require __DIR__.'/pdo.php';
+      protected $statement;
 
-      $sql = 'INSERT INTO tweets (json) VALUES (?)';
+      /**
+       * Enqueue each status
+       *
+       * @param string $status
+       */
+      public function enqueueStatus($status)
+      {
+          if (is_null($this->statement)) {
+              // returns an instance of PDO
+              // https://github.com/jpuck/qdbp
+              $pdo = require __DIR__.'/pdo.php';
 
-      $pdo->prepare($sql)->execute([$status]);
-  }
+              $sql = 'INSERT INTO tweets (json) VALUES (?)';
+
+              $this->statement = $pdo->prepare($sql);
+          }
+
+          $this->statement->execute([$status]);
+      }
 }
 
 // The OAuth credentials you received when registering your app at Twitter
