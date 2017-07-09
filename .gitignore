@@ -1,3 +1,4 @@
 /tests/coverage/
 /phpunit.xml
 .env
+/*pdo.php
