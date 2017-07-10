@@ -1,0 +1,14 @@
+version: '2.1'
+services:
+    consumer:
+        container_name: consumer
+        image: salute/consumer
+        environment:
+            - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
+            - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
+            - OAUTH_TOKEN=${OAUTH_TOKEN}
+            - OAUTH_SECRET=${OAUTH_SECRET}
+            - MYSQL_HOSTNAME=${MYSQL_HOSTNAME}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}

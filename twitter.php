@@ -7,27 +7,48 @@ require __DIR__.'/vendor/autoload.php';
  */
 class FilterTrackConsumer extends OauthPhirehose
 {
-      protected $statement;
+    protected $pdo;
+    protected $statement;
 
-      /**
-       * Enqueue each status
-       *
-       * @param string $status
-       */
-      public function enqueueStatus($status)
-      {
-          if (is_null($this->statement)) {
-              // returns an instance of PDO
-              // https://github.com/jpuck/qdbp
-              $pdo = require __DIR__.'/pdo.php';
+    public function __construct(...$args)
+    {
+        parent::__construct(...$args);
+        $this->setPdo();
+    }
 
-              $sql = 'INSERT INTO tweets (json) VALUES (?)';
+    /**
+    * Enqueue each status
+    *
+    * @param string $status
+    */
+    public function enqueueStatus($status)
+    {
+        if (is_null($this->statement)) {
+          $sql = 'INSERT INTO tweets (json) VALUES (?)';
 
-              $this->statement = $pdo->prepare($sql);
-          }
+          $this->statement = $this->pdo->prepare($sql);
+        }
 
-          $this->statement->execute([$status]);
-      }
+        $this->statement->execute([$status]);
+    }
+
+    public function setPdo()
+    {
+        $hostname = getenv('MYSQL_HOSTNAME');
+        $database = getenv('MYSQL_DATABASE');
+        $username = getenv('MYSQL_USER');
+        $password = getenv('MYSQL_PASSWORD');
+
+        $pdo = new \PDO("mysql:host=$hostname;
+            charset=UTF8;
+            dbname=$database",
+            $username,
+            $password
+        );
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+        return $this->pdo = $pdo;
+    }
 }
 
 // The OAuth credentials you received when registering your app at Twitter
