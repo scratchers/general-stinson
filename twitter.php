@@ -39,15 +39,23 @@ class FilterTrackConsumer extends OauthPhirehose
         $username = getenv('MYSQL_USER');
         $password = getenv('MYSQL_PASSWORD');
 
-        $pdo = new \PDO("mysql:host=$hostname;
-            charset=UTF8;
-            dbname=$database",
-            $username,
-            $password
-        );
-        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        while (empty($this->pdo)) {
+            try {
+                $pdo = new \PDO("mysql:host=$hostname;
+                    charset=UTF8;
+                    dbname=$database",
+                    $username,
+                    $password
+                );
+                $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                $this->pdo = $pdo;
+            }
+            catch (PDOException $e) {
+                echo "{$e->getMessage()}\n";
+            }
+        }
 
-        return $this->pdo = $pdo;
+        return $this->pdo;
     }
 }
 
