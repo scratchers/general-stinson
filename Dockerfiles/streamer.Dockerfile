@@ -5,7 +5,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY twitter.php /srv/
+COPY twitter.php keywords.php /srv/
 COPY src /srv/src
 COPY vendor /srv/vendor
 

@@ -74,5 +74,5 @@ define("OAUTH_SECRET", getenv('OAUTH_SECRET'));
 
 // Start streaming
 $sc = new FilterTrackConsumer(OAUTH_TOKEN, OAUTH_SECRET, Phirehose::METHOD_FILTER);
-$sc->setTrack(array('major', 'general', 'kernel'));
+$sc->setTrack(require __DIR__.'/keywords.php');
 $sc->consume();
