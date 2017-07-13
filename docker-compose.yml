@@ -9,14 +9,14 @@ services:
             - OAUTH_TOKEN=${OAUTH_TOKEN}
             - OAUTH_SECRET=${OAUTH_SECRET}
             - MYSQL_HOSTNAME=database
-            - MYSQL_DATABASE=${MYSQL_DATABASE}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE:-salute}
+            - MYSQL_USER=${MYSQL_USER:-saluter}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
     database:
         container_name: database
         image: salute/database
         environment:
-            - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
-            - MYSQL_DATABASE=${MYSQL_DATABASE}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD:-password}
+            - MYSQL_DATABASE=${MYSQL_DATABASE:-salute}
+            - MYSQL_USER=${MYSQL_USER:-saluter}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
