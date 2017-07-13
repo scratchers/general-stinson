@@ -1,8 +1,22 @@
 version: '2.1'
 services:
-    consumer:
-        container_name: consumer
-        image: salute/consumer
+    database:
+        container_name: database
+        image: salute/database
+        networks:
+            salutations:
+                ipv4_address: ${SALUTATIONS_DATABASE_IP:-172.22.22.2}
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD:-password}
+            - MYSQL_DATABASE=${MYSQL_DATABASE:-salute}
+            - MYSQL_USER=${MYSQL_USER:-saluter}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
+    streamer:
+        container_name: streamer
+        image: salute/streamer
+        networks:
+            salutations:
+                ipv4_address: ${SALUTATIONS_DATABASE_IP:-172.22.22.3}
         environment:
             - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
             - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
@@ -12,11 +26,13 @@ services:
             - MYSQL_DATABASE=${MYSQL_DATABASE:-salute}
             - MYSQL_USER=${MYSQL_USER:-saluter}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
-    database:
-        container_name: database
-        image: salute/database
-        environment:
-            - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD:-password}
-            - MYSQL_DATABASE=${MYSQL_DATABASE:-salute}
-            - MYSQL_USER=${MYSQL_USER:-saluter}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
+networks:
+    salutations:
+        driver: "bridge"
+        driver_opts:
+            com.docker.network.enable_ipv6: "false"
+        ipam:
+            driver: default
+            config:
+                - subnet: ${SALUTATIONS_SUBNET:-172.22.22.0/24}
+                  gateway: ${SALUTATIONS_GATEWAY:-172.22.22.1}

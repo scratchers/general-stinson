@@ -1,10 +1,6 @@
 # Installation
 
-Install the PHP dependencies locally with composer.
+Requires php 7, composer, docker, and docker-compose.
 
-    composer install --no-dev
-
-Docker build contexts must be relative to project root.
-
-    docker build --file Docker/StreamingApi/php/Dockerfile --tag salute/consumer .
-    docker build --file Docker/StreamingApi/mysql/Dockerfile --tag salute/database .
+    ./build.bash
+    docker-compose up
