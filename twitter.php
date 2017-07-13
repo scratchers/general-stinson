@@ -50,9 +50,13 @@ class FilterTrackConsumer extends OauthPhirehose
                 $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 $this->pdo = $pdo;
             }
+
             catch (PDOException $e) {
                 echo "{$e->getMessage()}\n";
             }
+
+            echo "waiting for database...\n";
+            sleep(3);
         }
 
         return $this->pdo;
