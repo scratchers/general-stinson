@@ -9,4 +9,4 @@ COPY keywords.php /srv/
 COPY public /srv/public
 COPY vendor /srv/vendor
 
-CMD [ "php", "/srv/public/streamer.php" ]
+CMD [ "php", "/srv/public/stream.php" ]
