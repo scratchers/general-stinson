@@ -5,8 +5,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY twitter.php keywords.php /srv/
-COPY src /srv/src
+COPY keywords.php /srv/
+COPY public /srv/public
 COPY vendor /srv/vendor
 
-CMD [ "php", "/srv/twitter.php" ]
+CMD [ "php", "/srv/public/streamer.php" ]

@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 /**
  * Example of using Phirehose to display a live filtered stream using track words
@@ -74,5 +74,5 @@ define("OAUTH_SECRET", getenv('OAUTH_SECRET'));
 
 // Start streaming
 $sc = new FilterTrackConsumer(OAUTH_TOKEN, OAUTH_SECRET, Phirehose::METHOD_FILTER);
-$sc->setTrack(require __DIR__.'/keywords.php');
+$sc->setTrack(require __DIR__.'/../keywords.php');
 $sc->consume();
