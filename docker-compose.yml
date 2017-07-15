@@ -16,7 +16,7 @@ services:
         image: salute/streamer
         networks:
             salutations:
-                ipv4_address: ${SALUTATIONS_DATABASE_IP:-172.22.22.3}
+                ipv4_address: ${SALUTATIONS_STREAMER_IP:-172.22.22.3}
         environment:
             - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
             - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
