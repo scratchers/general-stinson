@@ -5,5 +5,5 @@ CREATE TABLE IF NOT EXISTS tweets
     tweet_id VARCHAR(22) UNIQUE,
     tweet TEXT,
     salutation VARCHAR(255),
-    rejected BOOLEAN
-);
+    rating TINYINT UNSIGNED
+) CHARSET=utf8mb4;

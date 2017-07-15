@@ -26,6 +26,17 @@ services:
             - MYSQL_DATABASE=${MYSQL_DATABASE:-salute}
             - MYSQL_USER=${MYSQL_USER:-saluter}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
+    parser:
+        container_name: parser
+        image: salute/parser
+        networks:
+            salutations:
+                ipv4_address: ${SALUTATIONS_PARSER_IP:-172.22.22.4}
+        environment:
+            - MYSQL_HOSTNAME=database
+            - MYSQL_DATABASE=${MYSQL_DATABASE:-salute}
+            - MYSQL_USER=${MYSQL_USER:-saluter}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
 networks:
     salutations:
         driver: "bridge"
