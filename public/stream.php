@@ -13,7 +13,19 @@ class FilterTrackConsumer extends OauthPhirehose
     public function __construct(...$args)
     {
         parent::__construct(...$args);
+
         $this->setPdo();
+
+        $this->setStatment();
+    }
+
+    public function setStatment(string $sql = null)
+    {
+        if (is_null($sql)) {
+            $sql = 'INSERT INTO tweets (json) VALUES (?)';
+        }
+
+        $this->statement = $this->pdo->prepare($sql);
     }
 
     /**
@@ -23,12 +35,6 @@ class FilterTrackConsumer extends OauthPhirehose
     */
     public function enqueueStatus($status)
     {
-        if (is_null($this->statement)) {
-          $sql = 'INSERT INTO tweets (json) VALUES (?)';
-
-          $this->statement = $this->pdo->prepare($sql);
-        }
-
         $this->statement->execute([$status]);
     }
 
