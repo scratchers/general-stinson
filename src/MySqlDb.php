@@ -8,9 +8,12 @@ use PDOException;
 class MySqlDb implements Tweets
 {
     protected $pdo;
+    protected $filter;
 
-    public function __construct()
+    public function __construct(Filter $filter)
     {
+        $this->filter = $filter;
+
         $this->connectOrKeepTrying();
     }
 
@@ -94,6 +97,19 @@ class MySqlDb implements Tweets
             $tweets[$index] = json_decode($row['json']);
             $tweets[$index]->dbid = $row['id'];
         }
+
+        return $this->filter($tweets);
+    }
+
+    protected function filter(array $tweets) : array
+    {
+        if (is_null($this->filter)) {
+            return $tweets;
+        }
+
+        $trash = $this->filter->filterTweetsAndReturnTrash($tweets);
+
+        $this->delete($trash);
 
         return $tweets;
     }

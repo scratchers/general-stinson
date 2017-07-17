@@ -4,8 +4,10 @@ require __DIR__.'/../vendor/autoload.php';
 
 use scratchers\salute\MySqlDb;
 use scratchers\salute\Parser;
+use scratchers\salute\RetweetFilter;
 
-$tweets = new MySqlDb;
+$tweets = new MySqlDb(new RetweetFilter);
+
 $parser = new Parser;
 
 while (!empty($batch = $tweets->getNew())) {
